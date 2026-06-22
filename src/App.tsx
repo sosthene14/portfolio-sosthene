@@ -18,7 +18,6 @@ import { ProjectsWindow } from "@/components/macos/ProjectsWindow"
 import { GameWindow } from "@/components/macos/GameWindow"
 import { WallpaperSettings } from "@/components/macos/WallpaperSettings"
 import { DesktopWidgets } from "@/components/macos/DesktopWidgets"
-import { WelcomeMessage } from "@/components/macos/WelcomeMessage"
 import { useWallpaper } from "@/hooks/use-wallpaper"
 import { Settings } from "lucide-react"
 import { MobileWidgets } from "@/components/macos/MobileWidget"
@@ -199,10 +198,7 @@ function App() {
     >
       {/* Menu Bar */}
       <MenuBar />
-       <WelcomeMessage />
       <div className="mt-10 md:mt-0">
-          {/* Welcome Message */}
-     
 
       {/* Desktop Icons */}
       <DesktopIcons onOpenSection={handleOpenSection} />

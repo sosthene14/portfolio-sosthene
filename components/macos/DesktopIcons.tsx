@@ -6,23 +6,30 @@ import { useIsMobile } from "@/hooks/use-mobile"
 interface DesktopIconProps {
   icon: React.ReactNode
   label: string
+  isMobile?: boolean
   onClick?: () => void
   onDoubleClick?: () => void
 }
 
-function DesktopIcon({ icon, label, onClick, onDoubleClick }: DesktopIconProps) {
+function DesktopIcon({ icon, label, isMobile, onClick, onDoubleClick }: DesktopIconProps) {
   const [isSelected, setIsSelected] = useState(false)
+  // Pas de surlignage persistant sur mobile (un tap ouvre directement)
+  const showSelected = isSelected && !isMobile
 
   return (
     <button
-      onClick={() => {
-        setIsSelected(true)
+      onClick={(e) => {
+        if (isMobile) {
+          ;(e.currentTarget as HTMLButtonElement).blur()
+        } else {
+          setIsSelected(true)
+        }
         onClick?.()
       }}
       onDoubleClick={onDoubleClick}
       onBlur={() => setIsSelected(false)}
-      className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-colors w-20 ${
-        isSelected ? "bg-macos-blue/30" : "hover:bg-foreground/5"
+      className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-colors w-20 focus:outline-none ${
+        showSelected ? "bg-macos-blue/30" : "hover:bg-foreground/5"
       }`}
     >
       <div className="w-16 h-16 flex items-center justify-center">
@@ -30,7 +37,7 @@ function DesktopIcon({ icon, label, onClick, onDoubleClick }: DesktopIconProps) 
       </div>
       <span
         className={`text-xs text-center leading-tight text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] ${
-          isSelected ? "bg-macos-blue px-1.5 py-0.5 rounded" : ""
+          showSelected ? "bg-macos-blue px-1.5 py-0.5 rounded" : ""
         }`}
       >
         {label}
@@ -102,6 +109,7 @@ export function DesktopIcons({ onOpenSection }: DesktopIconsProps) {
             />
           }
           label={app.name}
+          isMobile={isMobile}
           // Mobile : ouvre au simple tap ; Desktop : double-clic (style macOS)
           onClick={isMobile ? () => onOpenSection(app.id) : undefined}
           onDoubleClick={() => onOpenSection(app.id)}
