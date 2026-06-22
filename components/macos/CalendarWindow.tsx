@@ -120,7 +120,7 @@ export function CalendarWindow() {
   return (
     <div className="h-full bg-macos-window flex">
       {/* Sidebar */}
-      <div className="w-64 bg-macos-sidebar border-r border-border/30 flex flex-col p-4">
+      <div className="hidden md:flex w-64 bg-macos-sidebar border-r border-border/30 flex-col p-4">
         {/* Mini Calendar */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-3">
@@ -211,55 +211,56 @@ export function CalendarWindow() {
       {/* Main calendar */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <div className="h-14 border-b border-border/30 flex items-center justify-between px-6">
-          <div className="flex items-center gap-4">
+        <div className="h-14 border-b border-border/30 flex items-center justify-between gap-2 px-3 md:px-6">
+          <div className="flex items-center gap-2 md:gap-4 min-w-0">
             <button
               onClick={goToToday}
-              className="px-3 py-1 hover:bg-foreground/10 rounded transition-colors text-sm"
+              className="px-2 md:px-3 py-1 hover:bg-foreground/10 rounded transition-colors text-xs md:text-sm flex-shrink-0"
             >
               Aujourd'hui
             </button>
-            <div className="flex items-center gap-2">
-              <button onClick={previousMonth} className="p-1 hover:bg-foreground/10 rounded transition-colors">
+            <div className="flex items-center gap-1 md:gap-2 min-w-0">
+              <button onClick={previousMonth} className="p-1 hover:bg-foreground/10 rounded transition-colors flex-shrink-0">
                 <ChevronLeft className="w-5 h-5" />
               </button>
-              <button onClick={nextMonth} className="p-1 hover:bg-foreground/10 rounded transition-colors">
+              <button onClick={nextMonth} className="p-1 hover:bg-foreground/10 rounded transition-colors flex-shrink-0">
                 <ChevronRight className="w-5 h-5" />
               </button>
-              <h2 className="text-lg font-semibold ml-2">
+              <h2 className="text-sm md:text-lg font-semibold md:ml-2 truncate">
                 {MONTHS[currentDate.getMonth()]} {currentDate.getFullYear()}
               </h2>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button className="px-4 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <button className="px-2.5 md:px-4 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium flex items-center gap-2">
               <Plus className="w-4 h-4" />
-              Nouvel événement
+              <span className="hidden sm:inline">Nouvel événement</span>
             </button>
           </div>
         </div>
 
         {/* Calendar grid */}
-        <div className="flex-1 p-4 overflow-auto">
+        <div className="flex-1 p-2 md:p-4 overflow-auto">
           {/* Day headers */}
           <div className="grid grid-cols-7 gap-1 mb-1">
             {DAYS.map(day => (
-              <div key={day} className="text-center font-semibold text-sm text-muted-foreground py-2">
-                {day}
+              <div key={day} className="text-center font-semibold text-xs md:text-sm text-muted-foreground py-1 md:py-2">
+                <span className="md:hidden">{day[0]}</span>
+                <span className="hidden md:inline">{day}</span>
               </div>
             ))}
           </div>
 
           {/* Calendar days */}
-          <div className="grid grid-cols-7 gap-1" style={{ gridAutoRows: "minmax(100px, 1fr)" }}>
+          <div className="grid grid-cols-7 gap-1 [grid-auto-rows:minmax(64px,1fr)] md:[grid-auto-rows:minmax(100px,1fr)]">
             {days.map((day, i) => {
               const dayEvents = day ? getEventsForDate(day) : []
               return (
                 <button
                   key={i}
                   onClick={() => day && setSelectedDate(day)}
-                  className={`border border-border/30 rounded-lg p-2 text-left hover:bg-foreground/5 transition-colors ${
+                  className={`border border-border/30 rounded-lg p-1 md:p-2 text-left overflow-hidden hover:bg-foreground/5 transition-colors ${
                     !day ? "bg-transparent" : isSameDay(selectedDate, day) ? "bg-red-500/10 border-red-500/30" : ""
                   }`}
                 >

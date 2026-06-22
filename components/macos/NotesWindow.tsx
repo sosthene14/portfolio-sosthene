@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Plus, Folder, FileText, Pin, Trash2 } from "lucide-react"
+import { Search, Plus, Folder, FileText, Pin, Trash2, ChevronLeft } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 interface Note {
   id: string
@@ -51,6 +52,14 @@ export function NotesWindow() {
   const [selectedFolder, setSelectedFolder] = useState("Toutes les notes")
   const [selectedNote, setSelectedNote] = useState<Note | null>(notes[0])
   const [searchQuery, setSearchQuery] = useState("")
+  const isMobile = useIsMobile()
+  // Sur mobile : liste OU note (une seule à la fois)
+  const [showNoteMobile, setShowNoteMobile] = useState(false)
+
+  const handleSelectNote = (note: Note) => {
+    setSelectedNote(note)
+    setShowNoteMobile(true)
+  }
 
   const filteredNotes = notes.filter((note) => {
     const matchesFolder = selectedFolder === "Toutes les notes" || note.folder === selectedFolder
@@ -66,7 +75,7 @@ export function NotesWindow() {
   return (
     <div className="flex h-full bg-macos-window">
       {/* Folders sidebar */}
-      <div className="w-48 bg-macos-sidebar border-r border-border/30 flex flex-col">
+      <div className="hidden md:flex w-48 bg-macos-sidebar border-r border-border/30 flex-col">
         <div className="p-3">
           <div className="relative">
             <Search className="w-4 h-4 absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -103,7 +112,41 @@ export function NotesWindow() {
       </div>
 
       {/* Notes list */}
-      <div className="w-64 border-r border-border/30 flex flex-col bg-macos-sidebar/50">
+      <div
+        className={`w-full md:w-64 border-r border-border/30 flex-col bg-macos-sidebar/50 ${
+          isMobile && showNoteMobile ? "hidden" : "flex"
+        }`}
+      >
+        {/* Recherche (mobile uniquement, car la sidebar est masquée) */}
+        <div className="p-3 pb-0 md:hidden">
+          <div className="relative">
+            <Search className="w-4 h-4 absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <input
+              type="text"
+              placeholder="Rechercher"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full h-8 pl-8 pr-3 text-sm bg-foreground/5 rounded-md border-none focus:outline-none focus:ring-2 focus:ring-macos-blue/50"
+            />
+          </div>
+          {/* Puces de dossiers */}
+          <div className="flex gap-1.5 overflow-x-auto py-2">
+            {folders.map((folder) => (
+              <button
+                key={folder}
+                onClick={() => setSelectedFolder(folder)}
+                className={`px-2.5 py-1 rounded-full text-[12px] whitespace-nowrap flex-shrink-0 transition-colors ${
+                  selectedFolder === folder
+                    ? "bg-macos-blue text-white"
+                    : "bg-foreground/5 text-foreground/70"
+                }`}
+              >
+                {folder}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="p-3 border-b border-border/30 flex items-center justify-between">
           <span className="text-sm font-medium">{filteredNotes.length} notes</span>
           <button className="p-1 hover:bg-foreground/10 rounded transition-colors text-macos-blue">
@@ -123,7 +166,7 @@ export function NotesWindow() {
                   key={note.id}
                   note={note}
                   isSelected={selectedNote?.id === note.id}
-                  onClick={() => setSelectedNote(note)}
+                  onClick={() => handleSelectNote(note)}
                 />
               ))}
             </>
@@ -141,7 +184,7 @@ export function NotesWindow() {
                   key={note.id}
                   note={note}
                   isSelected={selectedNote?.id === note.id}
-                  onClick={() => setSelectedNote(note)}
+                  onClick={() => handleSelectNote(note)}
                 />
               ))}
             </>
@@ -150,10 +193,23 @@ export function NotesWindow() {
       </div>
 
       {/* Note content */}
-      <div className="flex-1 flex flex-col bg-[#fffef5]">
+      <div
+        className={`flex-1 flex-col bg-[#fffef5] ${
+          isMobile && !showNoteMobile ? "hidden" : "flex"
+        }`}
+      >
         {selectedNote ? (
           <>
             <div className="p-4 border-b border-border/20">
+              {isMobile && (
+                <button
+                  onClick={() => setShowNoteMobile(false)}
+                  className="flex items-center gap-1 mb-2 text-sm text-macos-blue"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                  Notes
+                </button>
+              )}
               <div className="text-xs text-muted-foreground mb-2">{selectedNote.date}</div>
               <input
                 type="text"

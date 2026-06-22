@@ -138,7 +138,7 @@ export function SpotifyWindow() {
       {/* Main Content */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <div className="w-60 bg-black p-6 flex flex-col gap-6">
+        <div className="hidden md:flex w-60 bg-black p-6 flex-col gap-6">
           <div className="space-y-4">
             <button className="flex items-center gap-4 text-white/70 hover:text-white transition-colors w-full text-left">
               <div className="w-6 h-6">🏠</div>
@@ -181,18 +181,18 @@ export function SpotifyWindow() {
         {/* Main View */}
         <div className="flex-1 overflow-auto">
           {/* Header with gradient */}
-          <div className={`h-64 bg-gradient-to-b ${currentSong.color} to-transparent p-6 flex items-end`}>
-            <div className="flex items-end gap-6">
-              <div className={`w-56 h-56 bg-gradient-to-br ${currentSong.color} rounded shadow-2xl flex items-center justify-center`}>
-                <Heart className="w-24 h-24 text-white" fill="white" />
+          <div className={`bg-gradient-to-b ${currentSong.color} to-transparent p-4 md:p-6 flex items-end`}>
+            <div className="flex items-end gap-4 md:gap-6 min-w-0">
+              <div className={`w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 flex-shrink-0 bg-gradient-to-br ${currentSong.color} rounded shadow-2xl flex items-center justify-center`}>
+                <Heart className="w-10 h-10 sm:w-16 sm:h-16 md:w-24 md:h-24 text-white" fill="white" />
               </div>
-              <div>
-                <div className="text-xs font-semibold mb-2">PLAYLIST</div>
-                <h1 className="text-7xl font-bold mb-6">Liked Songs</h1>
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="font-semibold">Sosthène Mounsambote</span>
+              <div className="min-w-0">
+                <div className="text-[10px] sm:text-xs font-semibold mb-1 md:mb-2">PLAYLIST</div>
+                <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-2 md:mb-6 leading-tight">Liked Songs</h1>
+                <div className="flex items-center gap-2 text-xs sm:text-sm flex-wrap">
+                  <span className="font-semibold truncate">Sosthène Mounsambote</span>
                   <span>•</span>
-                  <span>{songs.length} songs</span>
+                  <span className="flex-shrink-0">{songs.length} songs</span>
                 </div>
               </div>
             </div>
@@ -222,7 +222,7 @@ export function SpotifyWindow() {
                 <button
                   key={i}
                   onClick={() => playTrack(i)}
-                  className={`grid grid-cols-[40px_1fr_1fr_80px] gap-4 px-4 py-2 rounded transition-colors group w-full text-left ${
+                  className={`grid grid-cols-[28px_1fr_60px] sm:grid-cols-[40px_1fr_1fr_80px] gap-3 sm:gap-4 px-3 sm:px-4 py-2 rounded transition-colors group w-full text-left ${
                     currentTrack === i && isPlaying ? "bg-white/20" : "hover:bg-white/10"
                   }`}
                 >
@@ -243,7 +243,7 @@ export function SpotifyWindow() {
                     </div>
                     <div className="text-sm text-white/60">{song.artist}</div>
                   </div>
-                  <div className="flex items-center text-sm text-white/60">{song.album}</div>
+                  <div className="hidden sm:flex items-center text-sm text-white/60 truncate">{song.album}</div>
                   <div className="flex items-center justify-end text-sm text-white/60">
                     {currentTrack === i ? formatTime(duration) : "--:--"}
                   </div>
@@ -255,21 +255,21 @@ export function SpotifyWindow() {
       </div>
 
       {/* Player Bar */}
-      <div className="h-24 bg-[#181818] border-t border-white/10 px-4 flex items-center justify-between">
+      <div className="h-20 md:h-24 bg-[#181818] border-t border-white/10 px-3 md:px-4 flex items-center justify-between gap-3">
         {/* Current Track */}
-        <div className="flex items-center gap-4 w-80">
-          <div className={`w-14 h-14 bg-gradient-to-br ${currentSong.color} rounded`} />
+        <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1 md:flex-none md:w-80">
+          <div className={`w-12 h-12 md:w-14 md:h-14 flex-shrink-0 bg-gradient-to-br ${currentSong.color} rounded`} />
           <div className="flex-1 min-w-0">
-            <div className="font-medium truncate">{currentSong.title}</div>
-            <div className="text-sm text-white/60 truncate">{currentSong.artist}</div>
+            <div className="font-medium truncate text-sm md:text-base">{currentSong.title}</div>
+            <div className="text-xs md:text-sm text-white/60 truncate">{currentSong.artist}</div>
           </div>
-          <button className="text-white/60 hover:text-white transition-colors">
+          <button className="hidden sm:block text-white/60 hover:text-white transition-colors flex-shrink-0">
             <Heart className="w-4 h-4" />
           </button>
         </div>
 
         {/* Player Controls */}
-        <div className="flex flex-col items-center gap-2 flex-1 max-w-2xl">
+        <div className="flex flex-col items-center gap-2 flex-1 max-w-2xl min-w-0">
           <div className="flex items-center gap-4">
             <button className="text-white/60 hover:text-white transition-colors">
               <Shuffle className="w-4 h-4" />
@@ -313,7 +313,7 @@ export function SpotifyWindow() {
         </div>
 
         {/* Volume */}
-        <div className="flex items-center gap-2 w-80 justify-end">
+        <div className="hidden md:flex items-center gap-2 w-80 justify-end">
           <Volume2 className="w-4 h-4 text-white/60" />
           <div 
             onClick={changeVolume}
