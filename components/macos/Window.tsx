@@ -205,7 +205,7 @@ export function Window({
     return (
       <div
         ref={windowRef}
-        className={`fixed inset-x-3 top-10 bottom-24 rounded-2xl macos-window-shadow flex flex-col transition-[transform,opacity] duration-200 ${
+        className={`fixed inset-x-3 top-10 bottom-4 rounded-2xl macos-window-shadow flex flex-col transition-[transform,opacity] duration-200 ${
           isMinimized ? "scale-0 opacity-0" : "scale-100 opacity-100"
         }`}
         style={{ zIndex }}

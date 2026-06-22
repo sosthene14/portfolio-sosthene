@@ -21,6 +21,7 @@ import { DesktopWidgets } from "@/components/macos/DesktopWidgets"
 import { useWallpaper } from "@/hooks/use-wallpaper"
 import { Settings } from "lucide-react"
 import { MobileWidgets } from "@/components/macos/MobileWidget"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 interface OpenWindow {
   id: string
@@ -35,6 +36,9 @@ function App() {
   const [openWindows, setOpenWindows] = useState<OpenWindow[]>([])
   const [focusedWindow, setFocusedWindow] = useState<string>("")
   const [isWallpaperSettingsOpen, setIsWallpaperSettingsOpen] = useState(false)
+  const isMobile = useIsMobile()
+  // Sur mobile, masquer le dock quand une fenêtre est ouverte
+  const hideDockMobile = isMobile && openWindows.some((w) => !w.isMinimized)
   
   const { wallpaper, updateWallpaper, getWallpaperStyle } = useWallpaper()
 
@@ -245,14 +249,16 @@ function App() {
         </Window>
       ))}
 
-      {/* Dock */}
-      <Dock 
-        onOpenFinder={handleOpenFinder} 
-        onOpenApp={handleOpenApp}
-        onOpenWallpaperSettings={() => setIsWallpaperSettingsOpen(true)}
-        minimizedWindows={openWindows.filter(w => w.isMinimized).map(w => ({ id: w.id, title: w.title, type: w.type }))}
-        onRestoreWindow={restoreWindow}
-      />
+      {/* Dock — masqué sur mobile quand une fenêtre est ouverte */}
+      {!hideDockMobile && (
+        <Dock
+          onOpenFinder={handleOpenFinder}
+          onOpenApp={handleOpenApp}
+          onOpenWallpaperSettings={() => setIsWallpaperSettingsOpen(true)}
+          minimizedWindows={openWindows.filter(w => w.isMinimized).map(w => ({ id: w.id, title: w.title, type: w.type }))}
+          onRestoreWindow={restoreWindow}
+        />
+      )}
     </div>
   )
 }
