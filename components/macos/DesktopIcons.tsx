@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 interface DesktopIconProps {
   icon: React.ReactNode
@@ -74,9 +75,9 @@ const desktopApps = [
     icon: "/contact.png"
   },
   { 
-    id: "game", 
-    name: "Snake", 
-    icon: "/snake.png"
+    id: "game",
+    name: "Aviator",
+    icon: "/aviator.png"
   },
   { 
     id: "cv", 
@@ -86,19 +87,23 @@ const desktopApps = [
 ]
 
 export function DesktopIcons({ onOpenSection }: DesktopIconsProps) {
+  const isMobile = useIsMobile()
+
   return (
     <div className="fixed top-12 mt-10 md:mt-0 left-0 md:left-6 grid grid-cols-2 items-center gap-2 z-10">
       {desktopApps.map((app) => (
         <DesktopIcon
           key={app.id}
           icon={
-            <img 
-              src={app.icon} 
+            <img
+              src={app.icon}
               alt={app.name}
               className="w-16 h-16 drop-shadow-lg"
             />
           }
           label={app.name}
+          // Mobile : ouvre au simple tap ; Desktop : double-clic (style macOS)
+          onClick={isMobile ? () => onOpenSection(app.id) : undefined}
           onDoubleClick={() => onOpenSection(app.id)}
         />
       ))}

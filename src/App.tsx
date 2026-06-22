@@ -64,7 +64,7 @@ function App() {
     } else if (type === "projects") {
       size = { width: 1150, height: 750 }
     } else if (type === "game") {
-      size = { width: 800, height: 900 }
+      size = { width: 640, height: 600 }
     } else if (type === "cv") {
       // Open CV in new tab
       window.open("/CV_Sosthene_Mounsambote.pdf", "_blank")
@@ -111,7 +111,7 @@ function App() {
       skills: "Compétences",
       projects: "Mes Projets",
       contact: "Contact",
-      game: "Snake Game 🐍",
+      game: "Aviator ✈️",
       cv: "Mon CV",
     }
     openWindow(section as OpenWindow["type"], titles[section] || section)
@@ -160,13 +160,13 @@ function App() {
       case "about":
         return <AboutWindow />
       case "experience":
-        return <ExperienceWindow onClose={() => closeWindow(window.id)} />
+        return <ExperienceWindow />
       case "education":
-        return <EducationWindow onClose={() => closeWindow(window.id)} />
+        return <EducationWindow />
       case "skills":
-        return <SkillsWindow onClose={() => closeWindow(window.id)} />
+        return <SkillsWindow />
       case "projects":
-        return <ProjectsWindow onClose={() => closeWindow(window.id)} />
+        return <ProjectsWindow />
       case "contact":
         return <ContactWindow />
       case "spotify":

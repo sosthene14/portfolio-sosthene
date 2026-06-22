@@ -14,10 +14,6 @@ import type { LucideIcon } from "lucide-react"
 import { portfolioData } from "@/data/portfolio-data"
 import { useIsMobile } from "@/hooks/use-mobile"
 
-interface ProjectsWindowProps {
-  onClose?: () => void
-}
-
 type Project = {
   id: number
   name: string
@@ -34,7 +30,7 @@ const categoryConfig: Record<string, { icon: LucideIcon; color: string }> = {
   Productivity: { icon: Folder, color: "#c4b5fd" },
 }
 
-export function ProjectsWindow({ onClose }: ProjectsWindowProps) {
+export function ProjectsWindow() {
   const projects = portfolioData.projects as Project[]
   const isMobile = useIsMobile()
 
@@ -317,26 +313,6 @@ export function ProjectsWindow({ onClose }: ProjectsWindowProps) {
             <Card key={project.id} project={project} />
           ))}
         </div>
-      </div>
-
-      {/* Footer */}
-      <div
-        className="flex items-center justify-end gap-3 px-5 md:px-8 py-4"
-        style={{ borderTop: "1px solid #1f1f25", background: "#131316" }}
-      >
-        <button
-          onClick={onClose}
-          className="px-5 py-2 text-[15px] font-medium rounded-lg transition-colors"
-          style={{ background: "#26262d", color: "#e8e8ec", border: "1px solid #303039" }}
-          onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#2e2e36")
-          }
-          onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#26262d")
-          }
-        >
-          Fermer
-        </button>
       </div>
     </div>
   )

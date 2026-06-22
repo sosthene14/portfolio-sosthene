@@ -5,18 +5,14 @@ import { Briefcase, Calendar, Building2, Search, ChevronLeft } from "lucide-reac
 import { portfolioData } from "@/data/portfolio-data"
 import { useIsMobile } from "@/hooks/use-mobile"
 
-interface ExperienceWindowProps {
-  onClose?: () => void
-}
-
-export function ExperienceWindow({ onClose }: ExperienceWindowProps) {
+export function ExperienceWindow() {
   const { experiences } = portfolioData
   const isMobile = useIsMobile()
 
   const [selectedId, setSelectedId] = useState<number>(experiences[0]?.id)
   const [query, setQuery] = useState("")
-  // On mobile we toggle between the list and the detail pane
-  const [showDetailMobile, setShowDetailMobile] = useState(false)
+  // On mobile we toggle between the list and the detail pane (detail shown first)
+  const [showDetailMobile, setShowDetailMobile] = useState(true)
 
   const typeConfig: Record<string, string> = {
     CDI: "text-[#a8c7fa] bg-[#a8c7fa]/10 border-[#a8c7fa]/25",
@@ -234,27 +230,6 @@ export function ExperienceWindow({ onClose }: ExperienceWindowProps) {
             </ul>
           </>
         )}
-      </div>
-
-      {/* Footer actions */}
-      <div
-        className="flex items-center justify-end gap-3 px-6 md:px-10 py-4"
-        style={{ borderTop: "1px solid #1f1f25", background: "#131316" }}
-      >
-        <button
-          onClick={onClose}
-          className="px-5 py-2 text-[15px] font-medium rounded-lg transition-colors"
-          style={{ background: "#26262d", color: "#e8e8ec", border: "1px solid #303039" }}
-          onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#2e2e36")
-          }
-          onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#26262d")
-          }
-        >
-          Fermer
-        </button>
-      
       </div>
     </div>
   )

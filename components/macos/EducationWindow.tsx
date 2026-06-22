@@ -5,17 +5,13 @@ import { GraduationCap, Calendar, School, Search, ChevronLeft, Target } from "lu
 import { portfolioData } from "@/data/portfolio-data"
 import { useIsMobile } from "@/hooks/use-mobile"
 
-interface EducationWindowProps {
-  onClose?: () => void
-}
-
-export function EducationWindow({ onClose }: EducationWindowProps) {
+export function EducationWindow() {
   const { education } = portfolioData
   const isMobile = useIsMobile()
 
   const [selectedId, setSelectedId] = useState<number>(education[0]?.id)
   const [query, setQuery] = useState("")
-  const [showDetailMobile, setShowDetailMobile] = useState(false)
+  const [showDetailMobile, setShowDetailMobile] = useState(true)
 
   const statusConfig: Record<string, string> = {
     "En cours": "text-[#a8c7fa] bg-[#a8c7fa]/10 border-[#a8c7fa]/25",
@@ -214,26 +210,6 @@ export function EducationWindow({ onClose }: EducationWindowProps) {
             </ul>
           </>
         )}
-      </div>
-
-      {/* Footer actions */}
-      <div
-        className="flex items-center justify-end gap-3 px-6 md:px-10 py-4"
-        style={{ borderTop: "1px solid #1f1f25", background: "#131316" }}
-      >
-        <button
-          onClick={onClose}
-          className="px-5 py-2 text-[15px] font-medium rounded-lg transition-colors"
-          style={{ background: "#26262d", color: "#e8e8ec", border: "1px solid #303039" }}
-          onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#2e2e36")
-          }
-          onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#26262d")
-          }
-        >
-          Fermer
-        </button>
       </div>
     </div>
   )

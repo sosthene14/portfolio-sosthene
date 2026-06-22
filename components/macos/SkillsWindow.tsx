@@ -19,10 +19,6 @@ import * as FaIcons from "react-icons/fa"
 import { portfolioData } from "@/data/portfolio-data"
 import { useIsMobile } from "@/hooks/use-mobile"
 
-interface SkillsWindowProps {
-  onClose?: () => void
-}
-
 type SkillItem = {
   name: string
   mono: string
@@ -53,7 +49,7 @@ const iconMap: Record<string, LucideIcon> = {
   network: Network,
 }
 
-export function SkillsWindow({ onClose }: SkillsWindowProps) {
+export function SkillsWindow() {
   const categories = portfolioData.skillCategories as SkillCategory[]
   const isMobile = useIsMobile()
 
@@ -242,13 +238,13 @@ export function SkillsWindow({ onClose }: SkillsWindowProps) {
         {/* Header */}
         <div className="flex items-start gap-4 mb-7">
           <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+            className="w-12 h-12 rounded-xl hidden md:flex items-center justify-center flex-shrink-0"
             style={{
               background: "linear-gradient(135deg, #1d2636, #15151a)",
               border: "1px solid #2a3a52",
             }}
           >
-            <Sparkles className="w-6 h-6" style={{ color: "#5b9bf3" }} />
+            <Sparkles className="w-6 h-6 hidden md:block" style={{ color: "#5b9bf3" }} />
           </div>
           <div>
             <h1
@@ -277,26 +273,6 @@ export function SkillsWindow({ onClose }: SkillsWindowProps) {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Footer */}
-      <div
-        className="flex items-center justify-end gap-3 px-5 md:px-8 py-4"
-        style={{ borderTop: "1px solid #1f1f25", background: "#131316" }}
-      >
-        <button
-          onClick={onClose}
-          className="px-5 py-2 text-[15px] font-medium rounded-lg transition-colors"
-          style={{ background: "#26262d", color: "#e8e8ec", border: "1px solid #303039" }}
-          onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#2e2e36")
-          }
-          onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLElement).style.background = "#26262d")
-          }
-        >
-          Fermer
-        </button>
       </div>
     </div>
   )

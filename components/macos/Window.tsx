@@ -188,46 +188,63 @@ export function Window({
 
   if (!isOpen) return null
 
+  // Barre basse persistante avec bouton Fermer (toutes les fenêtres)
+  const footerBar = (
+    <div className="flex items-center justify-end px-2.5 py-1.5 md:px-4 md:py-2.5 shrink-0 border-t border-border/30 bg-macos-sidebar">
+      <button
+        onClick={onClose}
+        className="px-3 py-1 text-xs md:px-4 md:py-1.5 md:text-sm font-medium rounded-lg text-foreground/90 bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+      >
+        Fermer
+      </button>
+    </div>
+  )
+
   // Sur mobile : plein écran fixe, pas de drag, pas de resize
   if (isMobile) {
     return (
       <div
         ref={windowRef}
-        className={`fixed mx-4 h-[550px] mt-10 rounded-md inset-0 bg-macos-window macos-glass flex flex-col transition-[transform,opacity] duration-200 ${
+        className={`fixed inset-x-3 top-10 bottom-24 rounded-2xl macos-window-shadow flex flex-col transition-[transform,opacity] duration-200 ${
           isMinimized ? "scale-0 opacity-0" : "scale-100 opacity-100"
         }`}
         style={{ zIndex }}
         onClick={onFocus}
       >
-        <div className="h-12 bg-macos-sidebar flex items-center px-4 gap-3 select-none shrink-0 border-b border-border/30">
-          <div className="window-controls flex items-center gap-2">
-            <button
-              onClick={onClose}
-              className="w-3 h-3 rounded-full bg-macos-red hover:brightness-90 transition-all group relative"
-            >
-              <span className="absolute inset-0 flex items-center justify-center text-[8px] text-red-900 opacity-0 group-hover:opacity-100">
-                ×
-              </span>
-            </button>
-            <button
-              onClick={handleMinimize}
-              className="w-3 h-3 rounded-full bg-macos-yellow hover:brightness-90 transition-all group relative"
-            >
-              <span className="absolute inset-0 flex items-center justify-center text-[8px] text-yellow-900 opacity-0 group-hover:opacity-100">
-                −
-              </span>
-            </button>
-            <div className="w-3 h-3 rounded-full bg-macos-green opacity-30 cursor-not-allowed" />
+        {/* Wrapper interne SANS backdrop-filter => le border-radius découpe bien les enfants */}
+        <div className="flex flex-col h-full w-full rounded-2xl overflow-hidden border border-white/10 bg-macos-window">
+          <div className="h-12 bg-macos-sidebar flex items-center px-4 gap-3 select-none shrink-0 border-b border-border/30">
+            <div className="window-controls flex items-center gap-2">
+              <button
+                onClick={onClose}
+                className="w-3 h-3 rounded-full bg-macos-red hover:brightness-90 transition-all group relative"
+              >
+                <span className="absolute inset-0 flex items-center justify-center text-[8px] text-red-900 opacity-0 group-hover:opacity-100">
+                  ×
+                </span>
+              </button>
+              <button
+                onClick={handleMinimize}
+                className="w-3 h-3 rounded-full bg-macos-yellow hover:brightness-90 transition-all group relative"
+              >
+                <span className="absolute inset-0 flex items-center justify-center text-[8px] text-yellow-900 opacity-0 group-hover:opacity-100">
+                  −
+                </span>
+              </button>
+              <div className="w-3 h-3 rounded-full bg-macos-green opacity-30 cursor-not-allowed" />
+            </div>
+
+            <div className="flex-1 text-center">
+              <span className="text-sm font-medium text-foreground/80">{title}</span>
+            </div>
+
+            <div className="w-14" />
           </div>
 
-          <div className="flex-1 text-center">
-            <span className="text-sm font-medium text-foreground/80">{title}</span>
-          </div>
+          <div className="flex-1 overflow-hidden">{children}</div>
 
-          <div className="w-14" />
+          {footerBar}
         </div>
-
-        <div className="flex-1 overflow-hidden">{children}</div>
       </div>
     )
   }
@@ -292,6 +309,8 @@ export function Window({
       </div>
 
       <div className="flex-1 overflow-hidden">{children}</div>
+
+      {footerBar}
 
       {/* Poignée de redimensionnement (coin bas-droit) */}
       {!isMaximized && (
