@@ -6,9 +6,8 @@ export interface WallpaperConfig {
 }
 
 const DEFAULT_WALLPAPER: WallpaperConfig = {
-  type: "gradient",
-  value:
-    "linear-gradient(135deg, oklch(0.75 0.15 280) 0%, oklch(0.7 0.18 320) 25%, oklch(0.8 0.12 35) 50%, oklch(0.75 0.15 200) 75%, oklch(0.7 0.18 250) 100%)",
+  type: "color",
+  value: "#000000",
 }
 
 const STORAGE_KEY = "macos-wallpaper"
