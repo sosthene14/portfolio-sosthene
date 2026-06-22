@@ -125,7 +125,7 @@ export function GameWindow() {
 
   return (
     <div
-      className="h-auto overflow-auto"
+      className="h-full overflow-y-auto"
       style={{
         background: "#0d0d10",
         fontFamily:
