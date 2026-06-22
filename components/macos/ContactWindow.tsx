@@ -90,7 +90,7 @@ export function ContactWindow() {
                 Informations
               </h3>
               <div className="space-y-3">
-  {contactItems.map(({ label, value, href, icon: Icon, external }) => (
+  {contactItems.map(({ label, value,  icon: Icon }) => (
     <div key={label} className="text-white">
       <div className="flex gap-2">
                 <Icon className="w-3.5 h-3.5 flex-shrink-0"  />

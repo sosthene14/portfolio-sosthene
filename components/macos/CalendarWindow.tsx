@@ -22,7 +22,6 @@ const DAYS = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
 export function CalendarWindow() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [selectedDate, setSelectedDate] = useState(new Date())
-  const [view, setView] = useState<"month" | "week" | "day">("month")
 
   const [events] = useState<Event[]>([
     {

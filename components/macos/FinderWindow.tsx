@@ -22,7 +22,6 @@ import {
   Download,
   Home,
   Monitor,
-  Trash2,
   Tag,
 } from "lucide-react"
 

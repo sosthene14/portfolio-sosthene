@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Grid3x3, Image as ImageIcon, Heart, Share2, Trash2, Search } from "lucide-react"
+import { Grid3x3, Image as ImageIcon, Heart, Share2, Search } from "lucide-react"
 
 interface Photo {
   id: string

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { X, Image, Palette } from "lucide-react"
 
 interface WallpaperSettingsProps {

@@ -47,7 +47,7 @@ const initialNotes: Note[] = [
 const folders = ["Toutes les notes", "Personnel", "Travail", "Récemment supprimées"]
 
 export function NotesWindow() {
-  const [notes, setNotes] = useState(initialNotes)
+  const [notes, ] = useState(initialNotes)
   const [selectedFolder, setSelectedFolder] = useState("Toutes les notes")
   const [selectedNote, setSelectedNote] = useState<Note | null>(notes[0])
   const [searchQuery, setSearchQuery] = useState("")

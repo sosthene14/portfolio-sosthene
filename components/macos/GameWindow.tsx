@@ -26,7 +26,7 @@ export function GameWindow() {
   const [speed, setSpeed] = useState(INITIAL_SPEED)
   const [cellSize, setCellSize] = useState(20)
 
-  const gameLoopRef = useRef<NodeJS.Timeout>()
+  const gameLoopRef = useRef<ReturnType<typeof requestAnimationFrame>>(null)
   const boardRef = useRef<HTMLDivElement>(null)
 
   // Calcule la cellSize selon la largeur disponible du board
@@ -89,6 +89,7 @@ export function GameWindow() {
       if (gameLoopRef.current) clearInterval(gameLoopRef.current)
       return
     }
+    //@ts-ignore
     gameLoopRef.current = setInterval(() => {
       setDirection(nextDirection)
       setSnake(currentSnake => {
