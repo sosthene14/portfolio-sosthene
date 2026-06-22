@@ -11,8 +11,8 @@ export function ExperienceWindow() {
 
   const [selectedId, setSelectedId] = useState<number>(experiences[0]?.id)
   const [query, setQuery] = useState("")
-  // On mobile we toggle between the list and the detail pane (detail shown first)
-  const [showDetailMobile, setShowDetailMobile] = useState(true)
+  // On mobile we toggle between the list and the detail pane (list shown first)
+  const [showDetailMobile, setShowDetailMobile] = useState(false)
 
   const typeConfig: Record<string, string> = {
     CDI: "text-[#a8c7fa] bg-[#a8c7fa]/10 border-[#a8c7fa]/25",

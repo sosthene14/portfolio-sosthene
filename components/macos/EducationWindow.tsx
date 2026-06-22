@@ -11,7 +11,7 @@ export function EducationWindow() {
 
   const [selectedId, setSelectedId] = useState<number>(education[0]?.id)
   const [query, setQuery] = useState("")
-  const [showDetailMobile, setShowDetailMobile] = useState(true)
+  const [showDetailMobile, setShowDetailMobile] = useState(false)
 
   const statusConfig: Record<string, string> = {
     "En cours": "text-[#a8c7fa] bg-[#a8c7fa]/10 border-[#a8c7fa]/25",

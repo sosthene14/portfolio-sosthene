@@ -97,7 +97,7 @@ export function DesktopIcons({ onOpenSection }: DesktopIconsProps) {
   const isMobile = useIsMobile()
 
   return (
-    <div className="fixed top-12 mt-10 md:mt-0 left-0 md:left-6 grid grid-cols-2 items-center gap-2 z-10">
+    <div className="fixed top-12 mt-10 md:mt-0 bottom-28 md:bottom-auto left-0 md:left-6 grid grid-cols-2 content-start items-start gap-2 z-10 overflow-y-auto md:overflow-visible pb-4">
       {desktopApps.map((app) => (
         <DesktopIcon
           key={app.id}
