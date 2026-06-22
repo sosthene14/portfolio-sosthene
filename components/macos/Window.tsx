@@ -15,6 +15,9 @@ interface WindowProps {
 }
 
 const MOBILE_BREAKPOINT = 768
+const MIN_WIDTH = 420
+const MIN_HEIGHT = 320
+const TOP_LIMIT = 0
 
 export function Window({
   title,
@@ -29,48 +32,32 @@ export function Window({
 }: WindowProps) {
   const [position, setPosition] = useState(initialPosition)
   const [size, setSize] = useState(initialSize)
-  const [isDragging, setIsDragging] = useState(false)
   const [isMaximized, setIsMaximized] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const dragOffset = useRef({ x: 0, y: 0 })
-  const previousState = useRef({ position, size })
+
   const windowRef = useRef<HTMLDivElement>(null)
+  const previousState = useRef({ position, size })
+
+  // Interaction state kept in refs so dragging never triggers React re-renders
+  const mode = useRef<"none" | "drag" | "resize">("none")
+  const start = useRef({ px: 0, py: 0, x: 0, y: 0, w: 0, h: 0 })
+  const rafId = useRef<number | null>(null)
+  const live = useRef({ x: position.x, y: position.y, w: size.width, h: size.height })
 
   // Détection mobile + resize
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
-    }
+    const checkMobile = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     checkMobile()
     window.addEventListener("resize", checkMobile)
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (isDragging && !isMaximized && !isMobile) {
-        setPosition({
-          x: e.clientX - dragOffset.current.x,
-          y: Math.max(28, e.clientY - dragOffset.current.y),
-        })
-      }
-    }
-    const handleMouseUp = () => setIsDragging(false)
-
-    if (isDragging) {
-      document.addEventListener("mousemove", handleMouseMove)
-      document.addEventListener("mouseup", handleMouseUp)
-    }
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove)
-      document.removeEventListener("mouseup", handleMouseUp)
-    }
-  }, [isDragging, isMaximized, isMobile])
-
+  // Fermeture au clic en dehors
   useEffect(() => {
     if (!isOpen) return
     const handleClickOutside = (e: MouseEvent) => {
+      if (mode.current !== "none") return
       if (windowRef.current && !windowRef.current.contains(e.target as Node)) {
         onClose()
       }
@@ -84,15 +71,100 @@ export function Window({
     }
   }, [isOpen, onClose])
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (isMobile) return
-    if ((e.target as HTMLElement).closest(".window-controls")) return
-    setIsDragging(true)
-    dragOffset.current = {
-      x: e.clientX - position.x,
-      y: e.clientY - position.y,
+  // Nettoyage rAF au démontage
+  useEffect(() => {
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current)
     }
+  }, [])
+
+  const beginInteraction = (e: React.PointerEvent, nextMode: "drag" | "resize") => {
+    if (isMobile || isMaximized) return
+    e.preventDefault()
+    e.stopPropagation()
     onFocus?.()
+    mode.current = nextMode
+    start.current = {
+      px: e.clientX,
+      py: e.clientY,
+      x: position.x,
+      y: position.y,
+      w: size.width,
+      h: size.height,
+    }
+    live.current = { x: position.x, y: position.y, w: size.width, h: size.height }
+    const el = windowRef.current
+    if (el) {
+      el.style.willChange = nextMode === "drag" ? "left, top" : "width, height"
+      try {
+        el.setPointerCapture(e.pointerId)
+      } catch {
+        /* noop */
+      }
+    }
+    document.body.style.userSelect = "none"
+  }
+
+  const handleTitlePointerDown = (e: React.PointerEvent) => {
+    if ((e.target as HTMLElement).closest(".window-controls")) return
+    beginInteraction(e, "drag")
+  }
+
+  const handleResizePointerDown = (e: React.PointerEvent) => {
+    beginInteraction(e, "resize")
+  }
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (mode.current === "none") return
+    if (rafId.current) return // throttle: une mise à jour par frame
+    const cx = e.clientX
+    const cy = e.clientY
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = null
+      const el = windowRef.current
+      if (!el) return
+      if (mode.current === "drag") {
+        const nx = start.current.x + (cx - start.current.px)
+        const ny = Math.max(TOP_LIMIT, start.current.y + (cy - start.current.py))
+        live.current.x = nx
+        live.current.y = ny
+        el.style.left = `${nx}px`
+        el.style.top = `${ny}px`
+      } else if (mode.current === "resize") {
+        const nw = Math.max(MIN_WIDTH, start.current.w + (cx - start.current.px))
+        const nh = Math.max(MIN_HEIGHT, start.current.h + (cy - start.current.py))
+        live.current.w = nw
+        live.current.h = nh
+        el.style.width = `${nw}px`
+        el.style.height = `${nh}px`
+      }
+    })
+  }
+
+  const endInteraction = (e: React.PointerEvent) => {
+    if (mode.current === "none") return
+    const wasMode = mode.current
+    mode.current = "none"
+    if (rafId.current) {
+      cancelAnimationFrame(rafId.current)
+      rafId.current = null
+    }
+    const el = windowRef.current
+    if (el) {
+      el.style.willChange = ""
+      try {
+        el.releasePointerCapture(e.pointerId)
+      } catch {
+        /* noop */
+      }
+    }
+    document.body.style.userSelect = ""
+    // Commit final values to state once
+    if (wasMode === "drag") {
+      setPosition({ x: live.current.x, y: live.current.y })
+    } else if (wasMode === "resize") {
+      setSize({ width: live.current.w, height: live.current.h })
+    }
   }
 
   const handleMaximize = () => {
@@ -102,8 +174,6 @@ export function Window({
       setSize(previousState.current.size)
     } else {
       previousState.current = { position, size }
-      setPosition({ x: 0, y: 28 })
-      setSize({ width: window.innerWidth, height: window.innerHeight - 28 - 80 })
     }
     setIsMaximized(!isMaximized)
   }
@@ -113,7 +183,7 @@ export function Window({
     setTimeout(() => {
       setIsMinimized(false)
       onMinimize?.()
-    }, 300)
+    }, 250)
   }
 
   if (!isOpen) return null
@@ -123,13 +193,12 @@ export function Window({
     return (
       <div
         ref={windowRef}
-        className={`fixed mx-4 h-[550px] mt-10 rounded-md  inset-0 bg-macos-window macos-glass flex flex-col transition-all duration-200 ${
+        className={`fixed mx-4 h-[550px] mt-10 rounded-md inset-0 bg-macos-window macos-glass flex flex-col transition-[transform,opacity] duration-200 ${
           isMinimized ? "scale-0 opacity-0" : "scale-100 opacity-100"
         }`}
         style={{ zIndex }}
         onClick={onFocus}
       >
-        {/* Title bar mobile */}
         <div className="h-12 bg-macos-sidebar flex items-center px-4 gap-3 select-none shrink-0 border-b border-border/30">
           <div className="window-controls flex items-center gap-2">
             <button
@@ -148,7 +217,6 @@ export function Window({
                 −
               </span>
             </button>
-            {/* Bouton maximize désactivé sur mobile */}
             <div className="w-3 h-3 rounded-full bg-macos-green opacity-30 cursor-not-allowed" />
           </div>
 
@@ -164,25 +232,30 @@ export function Window({
     )
   }
 
-  // Desktop : comportement original
+  // Desktop
   return (
     <div
       ref={windowRef}
-      className={`fixed -mt-5 bg-macos-window macos-glass rounded-xl macos-window-shadow overflow-hidden flex flex-col transition-all duration-200 ${
+      onPointerMove={handlePointerMove}
+      onPointerUp={endInteraction}
+      onPointerCancel={endInteraction}
+      className={`fixed bg-macos-window macos-glass rounded-xl macos-window-shadow overflow-hidden flex flex-col transition-[transform,opacity] duration-200 ${
         isMinimized ? "scale-0 opacity-0" : "scale-100 opacity-100"
       }`}
       style={{
         left: isMaximized ? 0 : position.x,
-        top: isMaximized ? 28 : position.y,
+        top: isMaximized ? TOP_LIMIT : position.y,
         width: isMaximized ? "100%" : size.width,
         height: isMaximized ? "calc(100vh - 108px)" : size.height,
         zIndex,
       }}
-      onClick={onFocus}
+      onMouseDown={onFocus}
     >
       <div
-        className="h-12 bg-macos-sidebar flex items-center px-4 gap-4 cursor-default select-none shrink-0 border-b border-border/30"
-        onMouseDown={handleMouseDown}
+        className="h-12 bg-macos-sidebar flex items-center px-4 gap-4 select-none shrink-0 border-b border-border/30"
+        style={{ cursor: isMaximized ? "default" : "grab", touchAction: "none" }}
+        onPointerDown={handleTitlePointerDown}
+        onDoubleClick={handleMaximize}
       >
         <div className="window-controls flex items-center gap-2">
           <button
@@ -219,6 +292,15 @@ export function Window({
       </div>
 
       <div className="flex-1 overflow-hidden">{children}</div>
+
+      {/* Poignée de redimensionnement (coin bas-droit) */}
+      {!isMaximized && (
+        <div
+          onPointerDown={handleResizePointerDown}
+          className="absolute bottom-0 right-0 w-4 h-4 z-10"
+          style={{ cursor: "nwse-resize", touchAction: "none" }}
+        />
+      )}
     </div>
   )
 }

@@ -160,13 +160,13 @@ function App() {
       case "about":
         return <AboutWindow />
       case "experience":
-        return <ExperienceWindow />
+        return <ExperienceWindow onClose={() => closeWindow(window.id)} />
       case "education":
-        return <EducationWindow />
+        return <EducationWindow onClose={() => closeWindow(window.id)} />
       case "skills":
-        return <SkillsWindow />
+        return <SkillsWindow onClose={() => closeWindow(window.id)} />
       case "projects":
-        return <ProjectsWindow />
+        return <ProjectsWindow onClose={() => closeWindow(window.id)} />
       case "contact":
         return <ContactWindow />
       case "spotify":

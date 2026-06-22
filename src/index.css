@@ -5,7 +5,7 @@
 
 :root {
   /* macOS Sonoma inspired color palette */
-  --background: oklch(0.95 0.01 250);
+  --background: oklch(0 0 0);
   --foreground: oklch(0.15 0 0);
   --card: oklch(1 0 0 / 0.7);
   --card-foreground: oklch(0.15 0 0);
