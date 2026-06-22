@@ -97,24 +97,26 @@ export function DesktopIcons({ onOpenSection }: DesktopIconsProps) {
   const isMobile = useIsMobile()
 
   return (
-    <div className="fixed top-12 mt-10 md:mt-0 bottom-28 md:bottom-auto left-0 md:left-6 grid grid-cols-2 content-start items-start gap-2 z-10 overflow-y-auto md:overflow-visible pb-4">
-      {desktopApps.map((app) => (
-        <DesktopIcon
-          key={app.id}
-          icon={
-            <img
-              src={app.icon}
-              alt={app.name}
-              className="w-16 h-16 drop-shadow-lg"
-            />
-          }
-          label={app.name}
-          isMobile={isMobile}
-          // Mobile : ouvre au simple tap ; Desktop : double-clic (style macOS)
-          onClick={isMobile ? () => onOpenSection(app.id) : undefined}
-          onDoubleClick={() => onOpenSection(app.id)}
-        />
-      ))}
+    <div className="fixed top-12 mt-10 md:mt-0 bottom-28 md:bottom-auto left-0 right-0 md:right-auto md:left-6 z-10 overflow-y-auto md:overflow-visible pb-4">
+      <div className="grid grid-cols-2 w-max content-start items-start gap-2">
+        {desktopApps.map((app) => (
+          <DesktopIcon
+            key={app.id}
+            icon={
+              <img
+                src={app.icon}
+                alt={app.name}
+                className="w-16 h-16 drop-shadow-lg"
+              />
+            }
+            label={app.name}
+            isMobile={isMobile}
+            // Mobile : ouvre au simple tap ; Desktop : double-clic (style macOS)
+            onClick={isMobile ? () => onOpenSection(app.id) : undefined}
+            onDoubleClick={() => onOpenSection(app.id)}
+          />
+        ))}
+      </div>
     </div>
   )
 }
