@@ -1,7 +1,7 @@
 export const portfolioData = {
   profile: {
     name: "Sosthène Mounsambote",
-    title: "Développeur Full Stack & DevOps",
+    title: "Ingénieur logiciel | IoT, Cloud, DevOps & QA",
     email: "sosthenemounsambote14@gmail.com",
     website: "sosthenemounsambote.com",
     phone: "+221 77 310 11 60",
@@ -12,19 +12,29 @@ export const portfolioData = {
   experiences: [
     {
       id: 1,
-      period: "2024 – présent",
+      period: "Depuis 2024",
       title: "Développeur Full Stack & DevOps",
-      company: "GatsMapping",
+      company: "GATS",
       type: "CDI",
       description:
-        "Développement d'applications web Full Stack et gestion des pipelines DevOps (CI/CD, containerisation, déploiement cloud).",
-      technologies: ["React", "Node.js", "Docker", "AWS", "CI/CD"],
+        "Conception et déploiement d’une plateforme de gestion et de suivi de stations-service : web, mobile, IoT et infrastructure.",
+      technologies: [
+        "React",
+        "Ant Design",
+        "React Native",
+        "Expo",
+        "MQTT",
+        "MongoDB",
+        "K3s",
+        "Nginx",
+        "GitLab CI/CD",
+      ],
       responsibilities: [
-        "Développement de nouvelles fonctionnalités Full Stack",
-        "Mise en place et gestion des pipelines CI/CD",
-        "Containerisation et déploiement sur le cloud (AWS)",
-        "Optimisation des performances de l'application",
-        "Collaboration avec les équipes Produit et Design",
+        "Développement de tableaux de bord web (React, Ant Design) pour superviser les stations, cuves, budgets, partenaires et tickets de ravitaillement.",
+        "Création d’une application mobile React Native / Expo pour gérer les allocations carburant avec QR code et profils client et pompiste.",
+        "Intégration IoT : collecte en temps réel des niveaux, volumes, températures et niveaux d’eau des jauges via MQTT, stockage des séries temporelles sur MongoDB et configuration des jauges par cuve.",
+        "Mise en place de l’infrastructure : cluster Kubernetes (K3s), reverse proxy Nginx, certificats SSL, conteneurisation et pipelines GitLab CI/CD avec runners dédiés.",
+        "Évaluation de la sécurité des intégrations fournisseurs et recommandations de renforcement.",
       ],
       link: "",
     },
@@ -35,7 +45,7 @@ export const portfolioData = {
       company: "Rostel High Tech",
       type: "CDD",
       description:
-        "Développement et maintenance d'applications web dans le cadre d'un contrat à durée déterminée.",
+        "Développement et maintenance d’applications web et mobiles, de la conception à la mise en production.",
       technologies: ["React", "Express", "PostgreSQL"],
       responsibilities: [
         "Développement et maintenance d'applications web",
@@ -52,7 +62,7 @@ export const portfolioData = {
       company: "Reaxion",
       type: "Prestataire",
       description:
-        "Développement d'applications web en tant que prestataire au sein de l'agence Reaxion.",
+        "Développement d’applications web sur mesure pour les clients de l’agence.",
       technologies: ["Next.js", "Django", "MongoDB"],
       responsibilities: [
         "Développement d'applications web sur mesure",
@@ -69,7 +79,7 @@ export const portfolioData = {
       company: "Groupe TASNIM",
       type: "Freelance",
       description:
-        "Conception d'affiches et de flyers en prestation graphique indépendante.",
+        "Conception d’affiches et de flyers pour des clients locaux en tant qu’indépendant.",
       technologies: ["Photoshop", "Illustrator"],
       responsibilities: [
         "Conception d'affiches et de flyers",
@@ -215,6 +225,36 @@ export const portfolioData = {
 
   projects: [
     {
+      id: 8,
+      name: "Vidzo",
+      description:
+        "Une vidéo. Trois réseaux. Publiez vos vidéos et photos sur TikTok, Instagram et Facebook depuis une seule plateforme web.",
+      technologies: ["Vidéo", "TikTok", "Instagram", "Facebook"],
+      category: "Web Development",
+      link: "https://vidzo.app/",
+      image: "/vidzo.png"
+    },
+    {
+      id: 9,
+      name: "GATS Energy",
+      description:
+        "Plateforme de gestion de flotte et d’allocation sécurisée de carburant. L’IoT aide les organisations à suivre et contrôler les consommations.",
+      technologies: ["IoT", "Gestion de flotte", "Suivi carburant", "Sécurité"],
+      category: "Web Development",
+      link: "",
+      image: ""
+    },
+    {
+      id: 10,
+      name: "AutoDiag",
+      description:
+        "Solution de diagnostic automobile connectée : des dispositifs IoT transmettent les pannes détectées sur les véhicules pour faciliter leur identification.",
+      technologies: ["IoT", "Diagnostic automobile", "Véhicules connectés"],
+      category: "Web Development",
+      link: "",
+      image: ""
+    },
+    {
       id: 7,
       name: "RoxShield",
       description:
@@ -234,24 +274,6 @@ export const portfolioData = {
       image: "/rocolis.PNG"
     },
     {
-      id: 5,
-      name: "Hackathon Musée v1",
-      description: "Prototype interactif pour musée virtuel",
-      technologies: ["Svelte", "Three.js"],
-      category: "Web Development",
-      link:"https://hackaton-mus-v1.vercel.app",
-      image: "/hackaton.PNG"
-    },
-    {
-      id: 2,
-      name: "UniDocs",
-      description: "Gestion intelligente de documents universitaires",
-      technologies: ["Next.js", "TypeScript", "NestJs"],
-      category: "Web Development",
-      link:"https://unidocs.vercel.app",
-      image: "/unidocs.PNG"
-    },
-    {
       id: 3,
       name: "EatSafe",
       description: "Plateforme complète de gestion de restauration",
@@ -259,25 +281,6 @@ export const portfolioData = {
       category: "Web Development",
       link:"http://eatsafe.pro",
       image: "/eatsafe.PNG"
-    },
-     {
-      id: 4,
-      name: "La Nuit des Étoiles",
-      description: "Application de vote en temps réel pour un concours",
-      technologies: ["React", "Node.js", "Socket.io"],
-      category: "Web Development",
-      link:"https://continentalaf.com",
-      image: ""
-    }
-   ,
-    {
-      id: 6,
-      name: "POS Restaurant",
-      description: "Application POS pour un restaurant",
-      technologies: ["NodeJS", "React", "PostgreSQL", "MongoDB"],
-      category: "Productivity",
-      link:"",
-      image: ""
     },
   ],
 }

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sosthène Mounsamboté – Développeur web & mobile</title>
+<meta name="description" content="Portfolio de Sosthène Mounsamboté, développeur web et mobile et responsable DevOps basé à Dakar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{--u:32px;--desk:#e6dcc4;--paper:#fbf7ec;--ink:#25314d;--ink2:#4a5675;--rule:#cfdcf0;--margin:#e8697d;--card:#fffdf6;--stamp:#b3261e;--stamp2:#2457c5;--shadow:rgba(60,45,20,.25);--y:#ffe36e;--p:#ffc2d1;--m:#bfe8cf;--b:#bcd9ff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#12141c;--paper:#222637;--ink:#f1e9d4;--ink2:#c3bfd0;--rule:#2f3550;--margin:#d86b83;--card:#2b3047;--stamp:#ff8c80;--stamp2:#8fb4ff;--shadow:rgba(0,0,0,.5)}}
+:root[data-theme="dark"]{--desk:#12141c;--paper:#222637;--ink:#f1e9d4;--ink2:#c3bfd0;--rule:#2f3550;--margin:#d86b83;--card:#2b3047;--stamp:#ff8c80;--stamp2:#8fb4ff;--shadow:rgba(0,0,0,.5)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--desk);color:var(--ink);font:20px/32px 'Patrick Hand','Segoe Print','Bradley Hand',cursive}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--stamp2);outline-offset:3px;border-radius:6px}
+
+.sheet{position:relative;max-width:1080px;margin:clamp(0px,3vw,36px) auto;padding:var(--u) clamp(18px,5vw,56px) calc(var(--u)*2) clamp(54px,10vw,124px);overflow:hidden;
+background-color:var(--paper);background-image:repeating-linear-gradient(var(--paper) 0 31px,var(--rule) 31px 32px);box-shadow:0 18px 40px -12px var(--shadow),0 2px 0 var(--shadow)}
+.sheet::before{content:"";position:absolute;top:0;bottom:0;left:clamp(40px,8vw,100px);width:2px;background:var(--margin);opacity:.75}
+.sheet::after{content:"";position:absolute;top:0;bottom:0;left:10px;width:20px;background:radial-gradient(circle,var(--desk) 0 7px,transparent 8px) center 0/20px 96px repeat-y}
+
+h1,h2,h3{font-family:'Caveat','Segoe Print',cursive;font-weight:700;margin:0;line-height:1}
+h1{font-size:clamp(3.2rem,9vw,5.8rem)}
+h2{font-size:clamp(2.4rem,6vw,3.4rem)}
+h1::after,h2::after{content:"";display:block;width:min(260px,70%);height:14px;margin-top:6px;background:var(--margin);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10'%3E%3Cpath d='M2 6 Q12 0 22 6T42 6T62 6T82 6T102 6T118 5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10'%3E%3Cpath d='M2 6 Q12 0 22 6T42 6T62 6T82 6T102 6T118 5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+p{margin:0}
+section{margin-top:calc(var(--u)*3)}
+.intro{margin-top:var(--u);max-width:34em;color:var(--ink2)}
+
+/* post-it, ruban, tampon */
+.pi{position:relative;background:var(--c,var(--y));color:#2a2a35;padding:26px 22px 30px;border-radius:2px 2px 16px 2px;transform:rotate(var(--r,0deg));transition:transform .2s;
+background-image:linear-gradient(180deg,rgba(255,255,255,.4),transparent 35%);box-shadow:2px 8px 12px -6px var(--shadow)}
+.pi:hover{transform:rotate(0deg) translateY(-4px)}
+.pi h3{font-size:2.1rem;margin-bottom:6px}
+.pi p{line-height:1.3}
+.tape{position:absolute;top:-13px;left:50%;width:92px;height:28px;transform:translateX(-50%) rotate(var(--tr,-3deg));
+background:repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 6px,rgba(255,255,255,.2) 6px 12px),var(--tc,#9ec9f5);opacity:.85;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.stamp{display:inline-block;font-family:'Special Elite','Courier New',monospace;text-transform:uppercase;letter-spacing:.08em;line-height:1.25;color:var(--stamp);border:3px solid currentColor;border-radius:8px;padding:8px 14px;outline:1.5px solid currentColor;outline-offset:3px;transform:rotate(var(--r,-6deg));filter:url(#rough);opacity:.9}
+.arrow{width:110px;height:64px;fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.arrow path{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .9s .6s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.note{font-family:'Caveat',cursive;font-size:1.7rem;line-height:1;color:var(--ink2);transform:rotate(-3deg)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:var(--u) 40px;align-items:start;padding-top:calc(var(--u)*1.5)}
+.lead{margin-top:var(--u);max-width:30em}
+.cta{display:flex;align-items:center;gap:6px;margin-top:var(--u);flex-wrap:wrap}
+.btn{display:inline-block;font:700 1.9rem/1 'Caveat',cursive;text-decoration:none;color:var(--ink);background:var(--y);color:#2a2a35;padding:12px 26px;border:2.5px solid #2a2a35;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;box-shadow:3px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(2px,2px);box-shadow:1px 2px 0 var(--ink)}
+.cta .arrow{transform:scaleX(-1) rotate(-8deg);width:90px}
+.desk{position:relative;min-height:400px}
+.desk .pi{position:absolute;width:min(250px,60%)}
+.desk .a{top:6px;left:0;--r:-4deg;--c:var(--y);--tc:#f6a5b8;width:min(290px,72%)}
+.desk .b{top:190px;right:0;--r:3deg;--c:var(--p);--tc:#a8d8b9}
+.desk .c{top:250px;left:6%;--r:-2deg;--c:var(--m);--tc:#ffd98a;display:none}
+.desk .stamp{position:absolute;right:2%;top:0;--r:7deg;animation:slam .45s 1.3s both cubic-bezier(.2,1.5,.4,1)}
+@keyframes slam{from{opacity:0;transform:rotate(7deg) scale(1.9)}to{opacity:.9;transform:rotate(7deg) scale(1)}}
+.desk .d{bottom:0;left:0;--r:2deg;--c:var(--m);--tc:#ffd98a}
+
+/* ce que je fais */
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px 28px;margin-top:calc(var(--u)*1.25)}
+.trio .pi:nth-child(1){--c:var(--y);--r:-2deg;--tc:#f6a5b8}
+.trio .pi:nth-child(2){--c:var(--b);--r:1.5deg;--tc:#ffd98a;margin-top:20px}
+.trio .pi:nth-child(3){--c:var(--p);--r:-1deg;--tc:#a8d8b9}
+
+/* méthode */
+.split{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center}
+.todo{list-style:none;padding:0;margin:24px 0 0;max-width:640px;display:grid;gap:8px}
+.todo button{display:flex;gap:16px;align-items:flex-start;width:100%;background:none;border:0;padding:6px 10px;text-align:left;font:inherit;color:inherit;cursor:pointer;border-radius:14px}
+.todo button:hover{background:color-mix(in srgb,var(--y) 24%,transparent)}
+.todo b{display:block;font:700 1.95rem/1.1 'Caveat',cursive}
+.todo span span{display:block;line-height:1.3;color:var(--ink2)}
+.box{flex:none;width:40px;height:40px;fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.ck{stroke:var(--margin);stroke-width:4.5;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .35s}
+[aria-pressed="true"] .ck{stroke-dashoffset:0}
+#ready{--r:-8deg;opacity:0;transform:rotate(-8deg) scale(1.9);transition:opacity .2s,transform .3s cubic-bezier(.2,1.5,.4,1);color:var(--stamp2);font-size:1.4rem}
+#ready.on{opacity:.9;transform:rotate(-8deg) scale(1)}
+
+/* projets */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:44px 30px;margin-top:calc(var(--u)*1.25)}
+.card{position:relative;background-color:var(--card);background-image:repeating-linear-gradient(transparent 0 27px,var(--rule) 27px 28px);padding:34px 22px 24px;transform:rotate(var(--r,0deg));box-shadow:2px 8px 14px -8px var(--shadow);transition:transform .2s}
+.card:hover{transform:rotate(0deg) translateY(-4px)}
+.card h3{font-size:2.3rem;padding-right:0}
+.card p{line-height:28px;margin-top:8px}
+.card .tag{display:inline-block;font:.85rem/1.3 'Special Elite','Courier New',monospace;color:var(--stamp2);border:2px solid currentColor;border-radius:6px;padding:1px 9px;margin-top:14px;transform:rotate(-2deg)}
+.card:nth-child(1){--r:-1.5deg;--tc:#f6a5b8}.card:nth-child(2){--r:1deg;--tc:#a8d8b9}.card:nth-child(3){--r:-.5deg;--tc:#ffd98a}
+.card:nth-child(4){--r:1.2deg;--tc:#9ec9f5}.card:nth-child(5){--r:-1deg;--tc:#ffd98a}.card:nth-child(6){--r:1.6deg;--tc:#f6a5b8}
+
+/* trousse */
+.chips{display:flex;flex-wrap:wrap;gap:14px;margin-top:calc(var(--u)*.9);max-width:720px}
+.chip{display:inline-block;padding:2px 16px;border:2.5px solid var(--ink);border-radius:255px 15px 225px 15px/15px 225px 15px 255px;transform:rotate(var(--r,0deg));background:var(--paper)}
+.chip:nth-child(3n){--r:-2deg}.chip:nth-child(3n+1){--r:1.5deg}.chip:nth-child(3n+2){--r:-.5deg}
+.aside{display:flex;align-items:center;gap:6px;margin-top:20px}
+.aside .arrow{transform:rotate(-30deg) scaleX(-1);width:80px}
+
+/* à propos */
+.about{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center}
+.about p{max-width:32em}
+.about p + p{margin-top:var(--u)}
+
+/* contact */
+#contact .pi{--c:var(--y);--r:-1.2deg;max-width:560px;padding:40px 30px 36px;margin-top:calc(var(--u)*1.2)}
+#contact .pi:hover{transform:rotate(-1.2deg)}
+.pin{position:absolute;top:-10px;left:50%;width:26px;height:26px;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle at 35% 30%,#ff8a80,#b3261e 70%);box-shadow:2px 5px 6px rgba(0,0,0,.3)}
+#contact h2{margin-bottom:10px}
+#contact h2::after{width:180px}
+.links{list-style:none;padding:0;margin:20px 0 0}
+.links li{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.links em{font:normal 700 1.6rem/1.4 'Caveat',cursive;min-width:7.5em}
+.links a{text-decoration:underline wavy var(--margin) 1.5px;text-underline-offset:5px;word-break:break-all}
+.sign{display:flex;justify-content:flex-end;margin-top:-20px}
+footer{margin-top:calc(var(--u)*2);color:var(--ink2);font-size:.95rem}
+
+@media (max-width:860px){
+.hero,.split,.about{grid-template-columns:1fr}
+.desk{min-height:0;display:flex;flex-wrap:wrap;gap:24px 18px;padding-top:30px}
+.desk .pi{position:relative;top:auto;left:auto;right:auto;bottom:auto;width:min(260px,100%)}
+.desk .a{width:min(300px,100%)}
+.desk .stamp{position:relative;right:auto;top:auto;align-self:center}
+.split #ready{justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){
+.arrow path{animation:none;stroke-dashoffset:0}
+.desk .stamp{animation:none}
+.ck,#ready,.pi,.card,.btn{transition:none}
+html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4"/></filter></svg>
+
+<main class="sheet">
+
+<header class="hero">
+  <div>
+    <h1>Bonjour, moi c’est Sosthène.</h1>
+    <p class="lead">Je crée des applications web et mobiles, je les mets en ligne et je veille à ce qu’elles tiennent bon. Vous m’expliquez votre idée avec vos mots, je m’occupe du reste.</p>
+    <div class="cta">
+      <a class="btn" href="#contact">Écrivez-moi</a>
+      <svg class="arrow" viewBox="0 0 120 70" aria-hidden="true"><path pathLength="1" d="M8 10C40-4 96 6 106 52"/><path pathLength="1" d="M94 44L106 54L110 38"/></svg>
+      <span class="note">on en parle ?</span>
+    </div>
+  </div>
+  <div class="desk">
+    <div class="pi a"><span class="tape"></span>
+      <h3>Développeur web &amp; mobile</h3>
+      <p>Et responsable DevOps, c’est-à-dire : je m’occupe de tout ce qui fait tourner l’application en coulisses.</p>
+    </div>
+    <div class="pi b"><span class="tape"></span>
+      <h3>Dakar, Sénégal</h3>
+      <p>Je travaille avec des clients d’ici et d’ailleurs.</p>
+    </div>
+    <div class="pi d"><span class="tape"></span>
+      <h3>Diplômé en génie logiciel</h3>
+      <p>Et en master cloud &amp; sécurité à l’IPD de Dakar.</p>
+    </div>
+    <span class="stamp">Disponible pour de nouveaux projets</span>
+  </div>
+</header>
+
+<section aria-labelledby="t-faire">
+  <h2 id="t-faire">Ce que je peux faire pour vous</h2>
+  <p class="intro">Pas de grands mots : voici, simplement, ce que je prends en charge.</p>
+  <div class="trio">
+    <article class="pi"><span class="tape"></span>
+      <h3>Créer votre application</h3>
+      <p>Site web, application mobile, plateforme en ligne : je dessine et je programme ce dont vous avez besoin, étape par étape.</p>
+    </article>
+    <article class="pi"><span class="tape"></span>
+      <h3>La mettre en ligne et veiller dessus</h3>
+      <p>Une application qui s’arrête en pleine nuit, ce n’est pas drôle. Je prépare les serveurs et la surveillance pour que tout tourne sans que vous y pensiez.</p>
+    </article>
+    <article class="pi"><span class="tape"></span>
+      <h3>La protéger</h3>
+      <p>Données de vos clients, accès, sauvegardes : je m’occupe de la sécurité sérieusement, sans vous noyer sous les mots compliqués.</p>
+    </article>
+  </div>
+</section>
+
+<section aria-labelledby="t-methode">
+  <h2 id="t-methode">Comment on travaille ensemble</h2>
+  <p class="intro">Cochez les étapes au fil de votre lecture.</p>
+  <div class="split">
+    <ul class="todo">
+      <li><button type="button" aria-pressed="false"><svg class="box" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 8L33 6L34 33L6 34Z"/><path class="ck" pathLength="1" d="M10 21L18 30L34 6"/></svg><span><b>On discute</b><span>Vous me racontez votre idée, même floue. Je pose les questions simples.</span></span></button></li>
+      <li><button type="button" aria-pressed="false"><svg class="box" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 8L33 6L34 33L6 34Z"/><path class="ck" pathLength="1" d="M10 21L18 30L34 6"/></svg><span><b>Je vous propose un plan</b><span>Ce qu’on fait, dans quel ordre, et en combien de temps.</span></span></button></li>
+      <li><button type="button" aria-pressed="false"><svg class="box" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 8L33 6L34 33L6 34Z"/><path class="ck" pathLength="1" d="M10 21L18 30L34 6"/></svg><span><b>Vous voyez le projet avancer</b><span>Des points réguliers et des versions à tester. Pas de surprise à la fin.</span></span></button></li>
+      <li><button type="button" aria-pressed="false"><svg class="box" viewBox="0 0 40 40" aria-hidden="true"><path d="M7 8L33 6L34 33L6 34Z"/><path class="ck" pathLength="1" d="M10 21L18 30L34 6"/></svg><span><b>Je livre, et je reste là</b><span>Mise en ligne, explications, et un coup de main quand vous en avez besoin.</span></span></button></li>
+    </ul>
+    <span class="stamp" id="ready" aria-live="polite">Prêt, on y va&nbsp;!</span>
+  </div>
+</section>
+
+<section aria-labelledby="t-projets">
+  <h2 id="t-projets">Quelques pages de mon carnet</h2>
+  <p class="intro">Des projets sur lesquels j’ai travaillé, racontés simplement.</p>
+  <div class="cards">
+    <article class="card"><span class="tape"></span>
+      <h3>Rocolis</h3>
+      <p>Une plateforme qui met en relation des personnes qui ont un colis à envoyer et des voyageurs qui font la route entre l’Afrique et l’Europe.</p>
+      <span class="tag">colis &amp; voyageurs</span>
+    </article>
+    <article class="card"><span class="tape"></span>
+      <h3>AutoDiag</h3>
+      <p>Un service qui lit les informations d’une voiture connectée pour aider à repérer les pannes avant qu’elles ne coûtent cher.</p>
+      <span class="tag">auto &amp; objets connectés</span>
+    </article>
+    <article class="card"><span class="tape"></span>
+      <h3>GATS Energy</h3>
+      <p>La gestion des stations et du carburant au quotidien, sur une infrastructure solide qui encaisse la charge.</p>
+      <span class="tag">énergie</span>
+    </article>
+    <article class="card"><span class="tape"></span>
+      <h3>BusTracker</h3>
+      <p>Une application mobile pour organiser et suivre les trajets des bus scolaires, du dépôt à la dernière école.</p>
+      <span class="tag">transport scolaire</span>
+    </article>
+    <article class="card"><span class="tape"></span>
+      <h3>RoxShield</h3>
+      <p>Apprendre aux équipes d’une entreprise à reconnaître les faux e-mails, grâce à des simulations d’arnaques réalistes mais sans danger.</p>
+      <span class="tag">cybersécurité</span>
+    </article>
+    <article class="card"><span class="tape"></span>
+      <h3>SamaLuxe</h3>
+      <p>Une boutique en ligne rapide à charger et pensée pour être bien trouvée sur les moteurs de recherche.</p>
+      <span class="tag">e-commerce</span>
+    </article>
+  </div>
+</section>
+
+<section aria-labelledby="t-trousse">
+  <h2 id="t-trousse">Dans ma trousse</h2>
+  <div class="chips">
+    <span class="chip">React</span><span class="chip">Next.js</span><span class="chip">React Native</span><span class="chip">TypeScript</span><span class="chip">Go</span><span class="chip">Python</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">GitLab CI/CD</span><span class="chip">Tailwind</span>
+  </div>
+  <div class="aside">
+    <svg class="arrow" viewBox="0 0 120 70" aria-hidden="true"><path pathLength="1" d="M8 10C40-4 96 6 106 52"/><path pathLength="1" d="M94 44L106 54L110 38"/></svg>
+    <span class="note">inutile de tout comprendre, c’est mon travail !</span>
+  </div>
+</section>
+
+<section aria-labelledby="t-moi">
+  <h2 id="t-moi">Un peu plus sur moi</h2>
+  <div class="about" style="margin-top:var(--u)">
+    <div>
+      <p>Je jongle entre plusieurs projets en même temps, côté écran comme côté serveurs : ce que vous voyez, et tout ce que vous ne voyez pas mais qui compte tout autant.</p>
+      <p>Quand j’ai un moment, je partage ce que j’apprends dans des tutoriels vidéo en français, sur ma chaîne YouTube.</p>
+    </div>
+    <span class="stamp" style="--r:5deg;color:var(--stamp2)">Fait à Dakar</span>
+  </div>
+</section>
+
+<section id="contact" aria-labelledby="t-contact">
+  <div class="pi"><span class="pin"></span>
+    <h2 id="t-contact">Parlons de votre projet</h2>
+    <p>Racontez-moi votre idée, même si elle n’est pas encore claire. Je vous réponds en français, simplement.</p>
+    <ul class="links">
+      <li><em>Par e-mail</em><a href="mailto:sosthenemounsambote14@gmail.com">sosthenemounsambote14@gmail.com</a></li>
+      <li><em>Par téléphone</em><a href="tel:+221773101160">+221 77 310 11 60</a></li>
+      <li><em>Mon code</em><a href="https://github.com/sosthene14" rel="noopener">github.com/sosthene14</a></li>
+    </ul>
+  </div>
+  <div class="sign"><span class="stamp" style="--r:-5deg">Sans jargon, promis</span></div>
+</section>
+
+<footer>© 2026 Sosthène Mounsamboté, Dakar</footer>
+
+</main>
+
+<script>
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('.todo button')),ready=document.getElementById('ready');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');
+      ready.classList.toggle('on',btns.every(function(x){return x.getAttribute('aria-pressed')==='true';}));
+    });
+  });
+})();
+</script>
+</body>
+</html>
