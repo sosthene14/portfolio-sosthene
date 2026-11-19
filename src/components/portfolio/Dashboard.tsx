@@ -181,7 +181,7 @@ export function Dashboard() {
   const [isDarkMode, setIsDarkMode] = useState(
     () => typeof window !== "undefined" && window.localStorage.getItem("portfolio-theme") === "dark",
   )
-  const [isMobileViewport, setIsMobileViewport] = useState(
+  const [, setIsMobileViewport] = useState(
     () => typeof window !== "undefined" && window.innerWidth <= 860,
   )
   const [activeSection, setActiveSection] = useState("accueil")
