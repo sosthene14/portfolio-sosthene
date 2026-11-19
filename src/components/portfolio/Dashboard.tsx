@@ -8,6 +8,7 @@ import {
   ExternalLink,
   Folder,
   Hand,
+  Lightbulb,
   Mail,
   Menu,
   Rocket,
@@ -181,6 +182,9 @@ export function Dashboard() {
   const [isDarkMode, setIsDarkMode] = useState(
     () => typeof window !== "undefined" && window.localStorage.getItem("portfolio-theme") === "dark",
   )
+  const [isMobileViewport, setIsMobileViewport] = useState(
+    () => typeof window !== "undefined" && window.innerWidth <= 860,
+  )
   const [activeSection, setActiveSection] = useState("accueil")
   const nameRef = useRef<HTMLSpanElement>(null)
   const visibleSections = useRef(new Map<string, number>())
@@ -189,6 +193,12 @@ export function Dashboard() {
   const aboutCardRef = useRef<HTMLDivElement>(null)
   const skillsCardRef = useRef<HTMLDivElement>(null)
   const projectsCardRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const updateMobileViewport = () => setIsMobileViewport(window.innerWidth <= 860)
+    window.addEventListener("resize", updateMobileViewport)
+    return () => window.removeEventListener("resize", updateMobileViewport)
+  }, [])
 
   useEffect(() => {
     window.localStorage.setItem("portfolio-theme", isDarkMode ? "dark" : "light")
@@ -283,6 +293,16 @@ export function Dashboard() {
         onClick={() => setMenuOpen(true)}
       >
         <Menu />
+      </button>
+      <button
+        className="fixed right-[64px] top-3 z-[25] hidden h-11 w-11 place-items-center rounded-xl border border-[#d9dee8] bg-white text-[#1b2540] dark:border-white/15 dark:bg-[#292d3a] dark:text-[#f3d982] max-[860px]:grid"
+        type="button"
+        onClick={() => setIsDarkMode((current) => !current)}
+        aria-label={isDarkMode ? "Activer le thème clair" : "Activer le thème sombre"}
+        aria-pressed={isDarkMode}
+        title={isDarkMode ? "Activer le thème clair" : "Activer le thème sombre"}
+      >
+        <Lightbulb className="h-[24px] w-[24px]" />
       </button>
 
       {menuOpen && (
@@ -434,7 +454,7 @@ export function Dashboard() {
         </section>
 
         <div className="grid grid-cols-[1.05fr_.95fr_1fr] items-start gap-[26px] pb-[25px] pt-[24px] max-[1180px]:grid-cols-2 max-[860px]:grid-cols-1">
-          <Draggable nodeRef={aboutCardRef} cancel="a,button">
+          <Draggable nodeRef={aboutCardRef} cancel="a,button" disabled={isMobileViewport}>
             <div ref={aboutCardRef} className="w-full">
             <section id="a-propos" className={`${cardBase} -rotate-[1deg] bg-[#fbf7ee]`}>
               <Tape className="-rotate-[3deg]" />
@@ -450,7 +470,7 @@ export function Dashboard() {
             </div>
           </Draggable>
 
-          <Draggable nodeRef={skillsCardRef} cancel="a,button">
+          <Draggable nodeRef={skillsCardRef} cancel="a,button" disabled={isMobileViewport}>
             <div ref={skillsCardRef} className="w-full">
             <section id="competences" className={`${cardBase} rotate-[.8deg] bg-white`}>
               <Tape className="rotate-[2deg]" />
@@ -470,7 +490,7 @@ export function Dashboard() {
             </div>
           </Draggable>
 
-          <Draggable nodeRef={projectsCardRef} cancel="a,button">
+          <Draggable nodeRef={projectsCardRef} cancel="a,button" disabled={isMobileViewport}>
             <div ref={projectsCardRef} className="w-full max-[1180px]:col-span-2 max-[860px]:col-span-1">
             <section id="projets" className={`${cardBase} rotate-[1.2deg] bg-[#fde9a2]`}>
               <Tape className="-rotate-[2deg]" />
@@ -602,7 +622,7 @@ export function Dashboard() {
                 href={url}
                 target="_blank"
                 rel="noreferrer"
-                className="relative flex min-h-[230px] flex-col border-[1.5px] border-[#27334e]/15 bg-[#fffdf7] px-[22px] pb-[20px] pt-[28px] text-[#27334e] transition-colors duration-200 hover:bg-[#f4f0e5] dark:border-white/15 dark:bg-[#292d3a] dark:text-[#eee7d7] dark:hover:bg-[#353a49] odd:-rotate-[.6deg] even:rotate-[.8deg]"
+                className="relative flex min-h-[230px] flex-col border-[1.5px] border-[#27334e]/15 bg-[#fffdf7] px-[22px] pb-[20px] pt-[28px] text-[#27334e] transition-colors duration-200 hover:bg-[#f4f0e5] dark:border-white/15 dark:bg-[#292d3a] dark:text-[#eee7d7] dark:hover:bg-[#353a49] odd:-rotate-[.6deg] even:rotate-[.8deg] max-[560px]:items-center max-[560px]:text-center"
               >
                 <span className="absolute -top-[13px] left-1/2 h-[24px] w-[72px] -translate-x-1/2 -rotate-[3deg] bg-[#e6d3a8]/80" />
                 <span className="grid h-[48px] w-[48px] place-items-center rounded-full border-[1.5px] border-[#27334e]/20" style={{ background: bg }}>
