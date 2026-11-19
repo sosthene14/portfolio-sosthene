@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react"
-import Draggable from "react-draggable"
 import { annotate } from "rough-notation"
 import {
   BriefcaseBusiness,
@@ -295,7 +294,7 @@ export function Dashboard() {
         <Menu />
       </button>
       <button
-        className="fixed right-[64px] top-3 z-[25] hidden h-11 w-11 place-items-center rounded-xl border border-[#d9dee8] bg-white text-[#1b2540] dark:border-white/15 dark:bg-[#292d3a] dark:text-[#f3d982] max-[860px]:grid"
+        className="fixed right-[64px] top-3 z-[25] hidden h-11 w-11 place-items-center rounded-xl border border-[#d9dee8] bg-white text-[#1b2540] dark:border-white/15 dark:bg-[#292d3a] dark:text-[#f3d982] max-[767px]:grid"
         type="button"
         onClick={() => setIsDarkMode((current) => !current)}
         aria-label={isDarkMode ? "Activer le thème clair" : "Activer le thème sombre"}
@@ -454,7 +453,6 @@ export function Dashboard() {
         </section>
 
         <div className="grid grid-cols-[1.05fr_.95fr_1fr] items-start gap-[26px] pb-[25px] pt-[24px] max-[1180px]:grid-cols-2 max-[860px]:grid-cols-1">
-          <Draggable nodeRef={aboutCardRef} cancel="a,button" disabled={isMobileViewport}>
             <div ref={aboutCardRef} className="w-full">
             <section id="a-propos" className={`${cardBase} -rotate-[1deg] bg-[#fbf7ee]`}>
               <Tape className="-rotate-[3deg]" />
@@ -468,9 +466,7 @@ export function Dashboard() {
               </a>
             </section>
             </div>
-          </Draggable>
 
-          <Draggable nodeRef={skillsCardRef} cancel="a,button" disabled={isMobileViewport}>
             <div ref={skillsCardRef} className="w-full">
             <section id="competences" className={`${cardBase} rotate-[.8deg] bg-white`}>
               <Tape className="rotate-[2deg]" />
@@ -488,9 +484,7 @@ export function Dashboard() {
               </div>
             </section>
             </div>
-          </Draggable>
 
-          <Draggable nodeRef={projectsCardRef} cancel="a,button" disabled={isMobileViewport}>
             <div ref={projectsCardRef} className="w-full max-[1180px]:col-span-2 max-[860px]:col-span-1">
             <section id="projets" className={`${cardBase} rotate-[1.2deg] bg-[#fde9a2]`}>
               <Tape className="-rotate-[2deg]" />
@@ -515,7 +509,6 @@ export function Dashboard() {
               </a>
             </section>
             </div>
-          </Draggable>
         </div>
 
         <section id="liste-projets" className="scroll-mt-5 pb-[20px] pt-[70px]">
