@@ -1,12 +1,18 @@
+// ============================================================
+//  PORTFOLIO — FICHIER DE CONFIGURATION UNIQUE
+//  Modifie uniquement ce fichier pour personnaliser ton portfolio.
+//  Toutes les données ci-dessous sont fictives (exemples).
+// ============================================================
+
 export const portfolioData = {
   profile: {
-    name: "Sosthène Mounsambote",
-    title: "Ingénieur logiciel | IoT, Cloud, DevOps & QA",
-    email: "sosthenemounsambote14@gmail.com",
-    website: "sosthenemounsambote.com",
-    phone: "+221 77 310 11 60",
-    github: "github.com/sosthene14",
-    bio: "Titulaire d'une Licence en Génie Informatique et actuellement en Master Génie Logiciel à l'IPD, je me suis spécialisé en développement Full Stack depuis plusieurs années. Fort d'une expérience progressive allant du freelance au CDI, je conçois des applications web robustes et maîtrise les pratiques DevOps modernes.",
+    name: "Prénom Nom",
+    title: "Ingénieur logiciel | Web, Cloud & DevOps",
+    email: "ton.email@exemple.com",
+    website: "tonsite.com",
+    phone: "+000 00 000 00 00",
+    github: "github.com/ton-pseudo",
+    bio: "Titulaire d'une Licence en Informatique et actuellement en Master Génie Logiciel, je me suis spécialisé en développement Full Stack depuis plusieurs années. Fort d'une expérience progressive allant du freelance au CDI, je conçois des applications web robustes et maîtrise les pratiques DevOps modernes.",
   },
 
   experiences: [
@@ -14,27 +20,26 @@ export const portfolioData = {
       id: 1,
       period: "Depuis 2024",
       title: "Développeur Full Stack & DevOps",
-      company: "GATS",
+      company: "Entreprise Exemple",
       type: "CDI",
       description:
-        "Conception et déploiement d’une plateforme de gestion et de suivi de stations-service : web, mobile, IoT et infrastructure.",
+        "Conception et déploiement d'une plateforme de gestion et de suivi : web, mobile et infrastructure.",
       technologies: [
         "React",
         "Ant Design",
         "React Native",
         "Expo",
-        "MQTT",
         "MongoDB",
-        "K3s",
+        "Kubernetes",
         "Nginx",
         "GitLab CI/CD",
       ],
       responsibilities: [
-        "Développement de tableaux de bord web (React, Ant Design) pour superviser les stations, cuves, budgets, partenaires et tickets de ravitaillement.",
-        "Création d’une application mobile React Native / Expo pour gérer les allocations carburant avec QR code et profils client et pompiste.",
-        "Intégration IoT : collecte en temps réel des niveaux, volumes, températures et niveaux d’eau des jauges via MQTT, stockage des séries temporelles sur MongoDB et configuration des jauges par cuve.",
-        "Mise en place de l’infrastructure : cluster Kubernetes (K3s), reverse proxy Nginx, certificats SSL, conteneurisation et pipelines GitLab CI/CD avec runners dédiés.",
-        "Évaluation de la sécurité des intégrations fournisseurs et recommandations de renforcement.",
+        "Développement de tableaux de bord web (React, Ant Design) pour superviser les activités de l'entreprise.",
+        "Création d'une application mobile React Native / Expo avec profils utilisateurs et QR code.",
+        "Mise en place de l'infrastructure : cluster Kubernetes, reverse proxy Nginx, certificats SSL et conteneurisation.",
+        "Création de pipelines GitLab CI/CD avec runners dédiés.",
+        "Évaluation de la sécurité des intégrations tierces et recommandations de renforcement.",
       ],
       link: "",
     },
@@ -42,10 +47,10 @@ export const portfolioData = {
       id: 2,
       period: "2023 – 2024",
       title: "Développeur Full Stack",
-      company: "Rostel High Tech",
+      company: "Société Démo",
       type: "CDD",
       description:
-        "Développement et maintenance d’applications web et mobiles, de la conception à la mise en production.",
+        "Développement et maintenance d'applications web et mobiles, de la conception à la mise en production.",
       technologies: ["React", "Express", "PostgreSQL"],
       responsibilities: [
         "Développement et maintenance d'applications web",
@@ -59,10 +64,10 @@ export const portfolioData = {
       id: 3,
       period: "2022 – 2023",
       title: "Développeur Full Stack",
-      company: "Reaxion",
+      company: "Agence Exemple",
       type: "Prestataire",
       description:
-        "Développement d’applications web sur mesure pour les clients de l’agence.",
+        "Développement d'applications web sur mesure pour les clients de l'agence.",
       technologies: ["Next.js", "Django", "MongoDB"],
       responsibilities: [
         "Développement d'applications web sur mesure",
@@ -76,10 +81,10 @@ export const portfolioData = {
       id: 4,
       period: "2021 – 2022",
       title: "Infographiste",
-      company: "Groupe TASNIM",
+      company: "Studio Créatif",
       type: "Freelance",
       description:
-        "Conception d’affiches et de flyers pour des clients locaux en tant qu’indépendant.",
+        "Conception d'affiches et de flyers pour des clients locaux en tant qu'indépendant.",
       technologies: ["Photoshop", "Illustrator"],
       responsibilities: [
         "Conception d'affiches et de flyers",
@@ -95,7 +100,7 @@ export const portfolioData = {
       id: 1,
       period: "2024 – présent",
       degree: "Master Génie Logiciel",
-      school: "IPD — Institut Polytechnique de Dakar",
+      school: "Université Exemple",
       status: "En cours",
       description:
         "Formation avancée axée sur l'architecture logicielle, les méthodologies Agile/DevOps et la conception de solutions web scalables et performantes.",
@@ -110,7 +115,7 @@ export const portfolioData = {
       id: 2,
       period: "2021 – 2024",
       degree: "Licence Génie Informatique",
-      school: "UNIPRO — Univers Professionnelle",
+      school: "Institut Démo",
       status: "Obtenu",
       description:
         "Formation fondamentale en informatique couvrant la programmation, les bases de données, les réseaux et le développement d'applications web.",
@@ -225,62 +230,62 @@ export const portfolioData = {
 
   projects: [
     {
-      id: 8,
-      name: "Vidzo",
-      description:
-        "Une vidéo. Trois réseaux. Publiez vos vidéos et photos sur TikTok, Instagram et Facebook depuis une seule plateforme web.",
-      technologies: ["Vidéo", "TikTok", "Instagram", "Facebook"],
-      category: "Web Development",
-      link: "https://vidzo.app/",
-      image: "/vidzo.png"
-    },
-    {
-      id: 9,
-      name: "GATS Energy",
-      description:
-        "Plateforme de gestion de flotte et d’allocation sécurisée de carburant. L’IoT aide les organisations à suivre et contrôler les consommations.",
-      technologies: ["IoT", "Gestion de flotte", "Suivi carburant", "Sécurité"],
-      category: "Web Development",
-      link: "",
-      image: ""
-    },
-    {
-      id: 10,
-      name: "AutoDiag",
-      description:
-        "Solution de diagnostic automobile connectée : des dispositifs IoT transmettent les pannes détectées sur les véhicules pour faciliter leur identification.",
-      technologies: ["IoT", "Diagnostic automobile", "Véhicules connectés"],
-      category: "Web Development",
-      link: "",
-      image: ""
-    },
-    {
-      id: 7,
-      name: "RoxShield",
-      description:
-        "Plateforme de sensibilisation et de formation à la cybersécurité : simulations de phishing, formations, quiz, suivi de progression et certifications.",
-      technologies: ["TypeScript", "Next.js", "NestJS", "PostgreSQL", "Docker"],
-      category: "Web Development",
-      link: "https://roxshield.com/",
-      image: "/roxshield.PNG"
-    },
-    {
       id: 1,
-      name: "ROCOLIS",
-      description: "Logistique collaborative et suivi en temps réel",
-      technologies: ["Spring Boot", "React", "Docker", "NodeJs"],
+      name: "Projet Exemple 1",
+      description:
+        "Une application web pour publier du contenu sur plusieurs réseaux sociaux depuis une seule interface.",
+      technologies: ["React", "Node.js", "PostgreSQL"],
       category: "Web Development",
-      link:"https://rocolis.com",
-      image: "/rocolis.PNG"
+      link: "https://exemple.com/projet-1",
+      image: "/projet-1.png",
+    },
+    {
+      id: 2,
+      name: "Projet Exemple 2",
+      description:
+        "Plateforme de gestion de flotte et de suivi de consommation, avec tableau de bord en temps réel.",
+      technologies: ["IoT", "Gestion de flotte", "Suivi", "Sécurité"],
+      category: "Web Development",
+      link: "",
+      image: "",
     },
     {
       id: 3,
-      name: "EatSafe",
+      name: "Projet Exemple 3",
+      description:
+        "Solution de diagnostic connectée : des capteurs transmettent les anomalies détectées pour faciliter leur identification.",
+      technologies: ["IoT", "Diagnostic", "Objets connectés"],
+      category: "Web Development",
+      link: "",
+      image: "",
+    },
+    {
+      id: 4,
+      name: "Projet Exemple 4",
+      description:
+        "Plateforme de formation en ligne : cours, quiz, suivi de progression et certifications.",
+      technologies: ["TypeScript", "Next.js", "NestJS", "PostgreSQL", "Docker"],
+      category: "Web Development",
+      link: "https://exemple.com/projet-4",
+      image: "/projet-4.png",
+    },
+    {
+      id: 5,
+      name: "Projet Exemple 5",
+      description: "Logistique collaborative et suivi en temps réel",
+      technologies: ["Spring Boot", "React", "Docker", "NodeJs"],
+      category: "Web Development",
+      link: "https://exemple.com/projet-5",
+      image: "/projet-5.png",
+    },
+    {
+      id: 6,
+      name: "Projet Exemple 6",
       description: "Plateforme complète de gestion de restauration",
       technologies: ["Django", "React", "PostgreSQL"],
       category: "Web Development",
-      link:"http://eatsafe.pro",
-      image: "/eatsafe.PNG"
+      link: "https://exemple.com/projet-6",
+      image: "/projet-6.png",
     },
   ],
 }
